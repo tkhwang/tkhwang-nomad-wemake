@@ -1,10 +1,16 @@
 import { Link } from "react-router";
-import { Card, CardHeader, CardTitle } from "~/common/components/ui/card";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/common/components/ui/card";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "~/common/components/ui/avatar";
+import { Button } from "~/common/components/ui/button";
 
 interface PostCardProps {
   id: string;
@@ -36,12 +42,17 @@ export function PostCard({
               {title}
             </CardTitle>
             <div className="flex gap-2 text-xs leading-tight text-muted-foreground">
-              <span>{author}</span>
+              <span>{author} on</span>
               <span>{category}</span>
               <span>{timeAgo}</span>
             </div>
           </div>
         </CardHeader>
+        <CardFooter className="flex justify-end">
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to={`/community/postId`}>Reply &rarr;</Link>
+          </Button>
+        </CardFooter>
       </Card>
     </Link>
   );
