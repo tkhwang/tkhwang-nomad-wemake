@@ -1,0 +1,6 @@
+{
+  "buildCommand": "react-router build",
+  "devCommand": "react-router dev",
+  "framework": null,
+  "outputDirectory": "build"
+}
