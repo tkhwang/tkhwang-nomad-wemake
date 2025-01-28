@@ -2,5 +2,11 @@
   "buildCommand": "react-router build",
   "devCommand": "react-router dev",
   "framework": null,
-  "outputDirectory": "build"
+  "outputDirectory": "build",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/server/index.js"
+    }
+  ]
 }
