@@ -16,7 +16,7 @@ interface PostCardProps {
   id: string;
   title: string;
   author: string;
-  avatarUrl?: string;
+  authorAvatarUrl?: string;
   category: string;
   timeAgo: string;
 }
@@ -25,7 +25,7 @@ export function PostCard({
   id,
   title,
   author,
-  avatarUrl,
+  authorAvatarUrl,
   category,
   timeAgo,
 }: PostCardProps) {
@@ -35,7 +35,7 @@ export function PostCard({
         <CardHeader className="flex flex-row items-center gap-2">
           <Avatar className="size-14">
             <AvatarFallback>N</AvatarFallback>
-            {avatarUrl && <AvatarImage src={avatarUrl} />}
+            {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} />}
           </Avatar>
           <div className="space-y-2">
             <CardTitle className="text-2xl font-semibold leading-none tracking-tight">

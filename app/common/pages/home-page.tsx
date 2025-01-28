@@ -76,16 +76,16 @@ export default function HomePage() {
           </Button>
         </div>
 
-        {/* Example usage with mock data */}
-        <PostCard
-          id="post-1"
-          title="Discussion Title"
-          author="Nico"
-          avatarUrl="https://github.com/shadcn.png"
-          category="Productivity"
-          timeAgo="12 hours ago"
-        />
-        {/* Add more PostCards as needed */}
+        {Array.from({ length: 10 }).map((_, index) => (
+          <PostCard
+            id={`post-${index}`}
+            title="What is the best productivity tool?"
+            author="Nico"
+            authorAvatarUrl="https://github.com/shadcn.png"
+            category="Productivity"
+            timeAgo="12 hours ago"
+          />
+        ))}
       </div>
     </div>
   );
