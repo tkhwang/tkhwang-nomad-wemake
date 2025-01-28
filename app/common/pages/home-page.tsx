@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from "~/common/components/ui/card";
 import { ProductCard } from "~/features/products/components/product-card";
+import { PostCard } from "~/features/community/components/post-card";
 
 export const meta: MetaFunction = () => {
   return [
@@ -62,7 +63,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        {/* product */}
+        {/* heading section */}
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
             Latest Discussions
@@ -75,24 +76,16 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <Card className="bg-transparent hover:bg-card/50 transition-colors">
-          <CardHeader className="flex flex-row items-center gap-2">
-            <Avatar className="size-14">
-              <AvatarFallback>N</AvatarFallback>
-              <AvatarImage src="https://github.com/shadcn.png" />
-            </Avatar>
-            <div className="space-y-2">
-              <CardTitle className="text-2xl font-semibold leading-none tracking-tight">
-                Discussion Title
-              </CardTitle>
-              <div className="flex gap-2 text-xs leading-tight text-muted-foreground">
-                <span>Nico</span>
-                <span>Productivity</span>
-                <span>12 hours ago</span>
-              </div>
-            </div>
-          </CardHeader>
-        </Card>
+        {/* Example usage with mock data */}
+        <PostCard
+          id="post-1"
+          title="Discussion Title"
+          author="Nico"
+          avatarUrl="https://github.com/shadcn.png"
+          category="Productivity"
+          timeAgo="12 hours ago"
+        />
+        {/* Add more PostCards as needed */}
       </div>
     </div>
   );
