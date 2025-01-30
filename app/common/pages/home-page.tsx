@@ -1,7 +1,9 @@
 import {
   ChevronRightIcon,
   ChevronUpIcon,
+  DotIcon,
   EyeIcon,
+  HeartIcon,
   MessageCircleIcon,
 } from "lucide-react";
 import { Link, type MetaFunction } from "react-router";
@@ -13,6 +15,7 @@ import {
 import { Button } from "~/common/components/ui/button";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -20,6 +23,7 @@ import {
 } from "~/common/components/ui/card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { PostCard } from "~/features/community/components/post-card";
+import { IdeaCard } from "~/features/ideas/components/idea-card";
 
 export const meta: MetaFunction = () => {
   return [
@@ -36,7 +40,6 @@ export default function HomePage() {
     <div className="px-20 space-y-40">
       {/* product */}
       <div className="grid grid-cols-3 gap-4">
-        {/* product */}
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
             Today's Products
@@ -49,7 +52,6 @@ export default function HomePage() {
           </Button>
         </div>
 
-        {/* project */}
         {Array.from({ length: 10 }).map((_, index) => (
           <ProductCard
             id={`productId-${index}`}
@@ -62,8 +64,8 @@ export default function HomePage() {
         ))}
       </div>
 
+      {/* Discussion */}
       <div className="grid grid-cols-3 gap-4">
-        {/* heading section */}
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
             Latest Discussions
@@ -84,6 +86,32 @@ export default function HomePage() {
             authorAvatarUrl="https://github.com/shadcn.png"
             category="Productivity"
             timeAgo="12 hours ago"
+          />
+        ))}
+      </div>
+
+      {/* IdeaGPT */}
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            IdeasGPT
+          </h2>
+          <p className="text-xl font-light text-foreground">
+            Find ideas for your next project.
+          </p>
+          <Button variant="link" asChild className="text-xl p-0">
+            <Link to="/community">Explore all ideas &rarr;</Link>
+          </Button>
+        </div>
+
+        {Array.from({ length: 5 }).map((_, index) => (
+          <IdeaCard
+            id="ideaId"
+            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recomendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business"
+            viewCount={123}
+            timeAgo="12 hours ago"
+            likesCount={12}
+            claimed={index % 2 === 0}
           />
         ))}
       </div>
