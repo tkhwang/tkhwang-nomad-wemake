@@ -30,6 +30,10 @@ export default [
         "/weekly/:year/:week",
         "features/products/pages/weekly-leaderboard-page.tsx"
       ),
+      route(
+        "/:period",
+        "features/products/pages/leaderboard-reidirection-page.tsx"
+      ),
     ]),
     // categories
     ...prefix("categories", [
