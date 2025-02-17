@@ -8,6 +8,20 @@
       "when": 1739780926203,
       "tag": "0000_light_gabe_jones",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739784721494,
+      "tag": "0001_worthless_norrin_radd",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739785812602,
+      "tag": "0002_friendly_black_tarantula",
+      "breakpoints": true
     }
   ]
 }
