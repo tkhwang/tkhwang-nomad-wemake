@@ -2,36 +2,44 @@ import { useSearchParams } from "react-router";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
+  PaginationEllipsis,
   PaginationNext,
   PaginationPrevious,
-} from "~/common/components/ui/pagination";
+} from "./ui/pagination";
 
-interface Props {
+type ProductPaginationProps = {
   totalPages: number;
-}
-function ProductPagination({ totalPages }: Props) {
+};
+
+export default function ProductPagination({
+  totalPages,
+}: ProductPaginationProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log("TCL: ProductPagination -> searchParams", searchParams);
+
+  const page = Number(searchParams.get("page") ?? 1);
+
+  const onClick = (page: number) => {
+    searchParams.set("page", page.toString());
+    setSearchParams(searchParams);
+  };
 
   return (
     <Pagination>
       <PaginationContent>
+        {page === 1 ? null : (
+          <>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">{page - 1}</PaginationLink>
+            </PaginationItem>
+          </>
+        )}
         <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink href="#">{page}</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
@@ -43,5 +51,3 @@ function ProductPagination({ totalPages }: Props) {
     </Pagination>
   );
 }
-
-export default ProductPagination;

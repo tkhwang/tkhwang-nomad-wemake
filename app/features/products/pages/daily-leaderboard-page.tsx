@@ -1,67 +1,55 @@
-import type { Route } from ".react-router/types/app/features/products/pages/+types/daily-leaderboard-page";
 import { DateTime } from "luxon";
 import { data, isRouteErrorResponse, Link } from "react-router";
 import { z } from "zod";
 import { Hero } from "~/common/components/hero";
+import { ProductCard } from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
-import { ProductCard } from "~/features/products/components/product-card";
+import ProductPagination from "~/common/components/product-pagination";
+import type { Route } from ".react-router/types/app/features/products/pages/+types/daily-leaderboard-page";
 
-const paramSchema = z.object({
+const paramsSchema = z.object({
   year: z.coerce.number(),
   month: z.coerce.number(),
   day: z.coerce.number(),
 });
 
-export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = paramSchema.safeParse(params);
+export const loader = ({ params }: Route.LoaderArgs) => {
+  const { success, data: parsedData } = paramsSchema.safeParse(params);
   if (!success) {
     throw data(
       {
         error_code: "invalid_params",
         message: "Invalid params",
       },
-      {
-        status: 400,
-      }
+      { status: 400 }
     );
   }
-  const { year, month, day } = parsedData;
-
-  const date = DateTime.fromObject(
-    {
-      year,
-      month,
-      day,
-    },
-    {
-      zone: "Asia/Seoul",
-    }
-  );
-
+  const date = DateTime.fromObject(parsedData).setZone("Asia/Seoul");
   if (!date.isValid) {
-    throw new Error("Invalid date");
-  }
-
-  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
-
-  if (date > today) {
     throw data(
       {
-        error_code: "future_date",
-        message: "Future date",
+        error_code: "invalid_date",
+        message: "Invalid date",
       },
       {
         status: 400,
       }
     );
   }
-
+  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
+  if (date > today) {
+    throw data(
+      {
+        error_code: "future_date",
+        message: "Future date",
+      },
+      { status: 400 }
+    );
+  }
   return {
-    year: date.year,
-    month: date.month,
-    day: date.day,
+    ...parsedData,
   };
-}
+};
 
 export default function DailyLeaderboardPage({
   loaderData,
@@ -71,17 +59,17 @@ export default function DailyLeaderboardPage({
     month: loaderData.month,
     day: loaderData.day,
   });
-
-  const previousDay = urlDate.minus({ day: 1 });
-  const nextDay = urlDate.plus({ day: 1 });
-
+  const previousDay = urlDate.minus({ days: 1 });
+  const nextDay = urlDate.plus({ days: 1 });
   const isToday = urlDate.equals(DateTime.now().startOf("day"));
-
   return (
     <div className="space-y-10">
-      <Hero title={`The best products of ${urlDate.toLocaleString()}`} />
-
-      <div className="flex justify-center gap-2">
+      <Hero
+        title={`The best products of ${urlDate.toLocaleString(
+          DateTime.DATE_MED
+        )}`}
+      />
+      <div className="flex items-center justify-center gap-2">
         <Button variant="secondary" asChild>
           <Link
             to={`/products/leaderboards/daily/${previousDay.year}/${previousDay.month}/${previousDay.day}`}
@@ -89,7 +77,7 @@ export default function DailyLeaderboardPage({
             &larr; {previousDay.toLocaleString(DateTime.DATE_SHORT)}
           </Link>
         </Button>
-        {!isToday && (
+        {!isToday ? (
           <Button variant="secondary" asChild>
             <Link
               to={`/products/leaderboards/daily/${nextDay.year}/${nextDay.month}/${nextDay.day}`}
@@ -97,21 +85,22 @@ export default function DailyLeaderboardPage({
               {nextDay.toLocaleString(DateTime.DATE_SHORT)} &rarr;
             </Link>
           </Button>
-        )}
+        ) : null}
       </div>
-
       <div className="space-y-5 w-full max-w-screen-md mx-auto">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 11 }).map((_, index) => (
           <ProductCard
+            key={`productId-${index}`}
             id={`productId-${index}`}
             name="Product Name"
-            description="Product description"
-            commentCount={12}
-            viewCount={12}
+            description="Product Description"
+            commentsCount={12}
+            viewsCount={12}
             votesCount={120}
           />
         ))}
       </div>
+      <ProductPagination totalPages={10} />
     </div>
   );
 }
@@ -120,14 +109,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     return (
       <div>
-        {error.data.message} | {error.data.error_code}
+        {error.data.message} / {error.data.error_code}
       </div>
     );
   }
-
   if (error instanceof Error) {
-    return <div>Error in leaderboard: {error.message}</div>;
+    return <div>{error.message}</div>;
   }
-
-  return <div>Unknown Error in leaderboard</div>;
+  return <div>Unknown error</div>;
 }
