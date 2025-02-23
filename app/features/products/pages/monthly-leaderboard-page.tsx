@@ -62,7 +62,9 @@ export default function MonthlyLeaderboardPage({
   });
   const previousMonth = urlDate.minus({ months: 1 });
   const nextMonth = urlDate.plus({ months: 1 });
+
   const isToday = urlDate.equals(DateTime.now().startOf("month"));
+
   return (
     <div className="space-y-10">
       <Hero

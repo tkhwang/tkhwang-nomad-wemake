@@ -59,7 +59,9 @@ export default function YearlyLeaderboardPage({
   });
   const previousYear = urlDate.minus({ years: 1 });
   const nextYear = urlDate.plus({ years: 1 });
+
   const isToday = urlDate.equals(DateTime.now().startOf("year"));
+
   return (
     <div className="space-y-10">
       <Hero

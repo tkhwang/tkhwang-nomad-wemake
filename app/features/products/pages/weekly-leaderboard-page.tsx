@@ -62,7 +62,9 @@ export default function WeeklyLeaderboardPage({
   });
   const previousWeek = urlDate.minus({ weeks: 1 });
   const nextWeek = urlDate.plus({ weeks: 1 });
+
   const isToday = urlDate.equals(DateTime.now().startOf("week"));
+
   return (
     <div className="space-y-10">
       <Hero

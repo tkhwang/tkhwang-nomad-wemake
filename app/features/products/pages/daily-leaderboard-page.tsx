@@ -61,7 +61,9 @@ export default function DailyLeaderboardPage({
   });
   const previousDay = urlDate.minus({ days: 1 });
   const nextDay = urlDate.plus({ days: 1 });
+
   const isToday = urlDate.equals(DateTime.now().startOf("day"));
+
   return (
     <div className="space-y-10">
       <Hero
