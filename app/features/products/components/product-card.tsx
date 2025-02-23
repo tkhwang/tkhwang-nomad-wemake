@@ -1,20 +1,20 @@
 import { Link } from "react-router";
-import { Button } from "~/common/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "~/common/components/ui/card";
-import { MessageCircleIcon, EyeIcon, ChevronUpIcon } from "lucide-react";
+import { Button } from "~/common/components/ui/button";
+import { ChevronUpIcon, EyeIcon, MessageCircleIcon } from "lucide-react";
 
 interface ProductCardProps {
   id: string;
   name: string;
   description: string;
-  commentCount: number;
-  viewCount: number;
+  commentsCount: number;
+  viewsCount: number;
   votesCount: number;
 }
 
@@ -22,8 +22,8 @@ export function ProductCard({
   id,
   name,
   description,
-  commentCount,
-  viewCount,
+  commentsCount,
+  viewsCount,
   votesCount,
 }: ProductCardProps) {
   return (
@@ -39,15 +39,15 @@ export function ProductCard({
           <div className="flex items-center gap-4 mt-2">
             <div className="flex items-center gap-px text-xs text-muted-foreground">
               <MessageCircleIcon className="w-4 h-4" />
-              <span>{commentCount}</span>
+              <span>{commentsCount}</span>
             </div>
             <div className="flex items-center gap-px text-xs text-muted-foreground">
               <EyeIcon className="w-4 h-4" />
-              <span>{viewCount}</span>
+              <span>{viewsCount}</span>
             </div>
           </div>
         </CardHeader>
-        <CardFooter>
+        <CardFooter className="py-0">
           <Button variant="outline" className="flex flex-col h-14">
             <ChevronUpIcon className="size-4 shrink-0" />
             <span>{votesCount}</span>
