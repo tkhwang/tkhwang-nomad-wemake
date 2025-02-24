@@ -1,44 +1,37 @@
-import type { Route } from "~/types";
-import type { MetaFunction } from "@remix-run/react";
+import { Hero } from "~/common/components/hero";
+import { ProductCard } from "../components/product-card";
+import ProductPagination from "~/common/components/product-pagination";
+import type { Route } from ".react-router/types/app/features/products/pages/+types/category-page";
 
-interface CategoryPageProps extends Route.ComponentProps {}
-
-export function meta({ params }: Route.MetaFunction): MetaFunction {
-  const { category } = params;
-  const formattedCategory = category?.replace(/-/g, " ");
-
+export const meta = ({ params }: Route.MetaArgs) => {
   return [
-    { title: `${formattedCategory} Products | Product Hunt Clone` },
-    { name: "description", content: `Browse ${formattedCategory} products` },
+    { title: `Developer Tools | ProductHunt Clone` },
+    { name: "description", content: `Browse Developer Tools products` },
   ];
-}
+};
 
-export function loader({ params }: Route.LoaderArgs) {
-  const { category } = params;
-
-  return {
-    category,
-    products: [],
-    totalProducts: 0,
-  };
-}
-
-export default function CategoryPage({ loaderData }: CategoryPageProps) {
-  const { category, products, totalProducts } = loaderData;
-  const formattedCategory = category.replace(/-/g, " ");
-
+export default function CategoryPage() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 capitalize">
-          {formattedCategory}
-        </h1>
-        <p className="text-muted-foreground">{totalProducts} products</p>
-      </header>
+    <div className="space-y-10">
+      <Hero
+        title={"Developer Tools"}
+        subtitle={`Tools for developers to build products faster`}
+      />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {/* Product cards will go here */}
+      <div className="space-y-5 w-full max-w-screen-md mx-auto">
+        {Array.from({ length: 11 }).map((_, index) => (
+          <ProductCard
+            key={`productId-${index}`}
+            id={`productId-${index}`}
+            name="Product Name"
+            description="Product Description"
+            commentsCount={12}
+            viewsCount={12}
+            votesCount={120}
+          />
+        ))}
       </div>
-    </main>
+      <ProductPagination totalPages={10} />
+    </div>
   );
 }

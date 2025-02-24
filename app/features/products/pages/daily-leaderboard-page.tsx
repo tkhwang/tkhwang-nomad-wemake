@@ -13,6 +13,23 @@ const paramsSchema = z.object({
   day: z.coerce.number(),
 });
 
+export const meta: Route.MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+    day: Number(params.day),
+  })
+    .setZone("Asia/Seoul")
+    .setLocale("ko");
+  return [
+    {
+      title: `The best products of ${date.toLocaleString(
+        DateTime.DATE_MED
+      )} | wemake`,
+    },
+  ];
+};
+
 export const loader = ({ params }: Route.LoaderArgs) => {
   const { success, data: parsedData } = paramsSchema.safeParse(params);
   if (!success) {
@@ -61,7 +78,9 @@ export default function DailyLeaderboardPage({
   });
   const previousDay = urlDate.minus({ days: 1 });
   const nextDay = urlDate.plus({ days: 1 });
+
   const isToday = urlDate.equals(DateTime.now().startOf("day"));
+
   return (
     <div className="space-y-10">
       <Hero
