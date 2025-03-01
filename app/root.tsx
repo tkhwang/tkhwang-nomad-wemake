@@ -9,7 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
-import Navigation from "~/common/components/navigation";
+import Navigation from "./common/components/navigation";
 import { Settings } from "luxon";
 
 export const links: Route.LinksFunction = () => [
@@ -29,9 +29,8 @@ export const links: Route.LinksFunction = () => [
 export function Layout({ children }: { children: React.ReactNode }) {
   Settings.defaultLocale = "ko";
   Settings.defaultZone = "Asia/Seoul";
-
   return (
-    <html lang="en">
+    <html lang="en" className="">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,9 +50,9 @@ export default function App() {
   return (
     <div className="py-28">
       <Navigation
-        isLoggedIn={true}
-        hasNotifications={true}
-        hasMessages={true}
+        isLoggedIn={false}
+        hasNotifications={false}
+        hasMessages={false}
       />
       <Outlet />
     </div>
@@ -77,7 +76,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="container p-4 pt-16 mx-auto">
+    <main className="pt-16 p-4 container mx-auto">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (

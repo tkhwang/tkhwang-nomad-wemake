@@ -1,3 +1,3 @@
-# tkhwang-nomad-wemake
+# WeMake
 
-[Maker 마스터클래스](https://nomadcoders.co/maker-masterclass)
+Welcome to WeMake, the home of makers.

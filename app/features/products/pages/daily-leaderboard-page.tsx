@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
+import { Route } from "./+types/daily-leaderboard-page";
 import { data, isRouteErrorResponse, Link } from "react-router";
 import { z } from "zod";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
 import ProductPagination from "~/common/components/product-pagination";
-import type { Route } from ".react-router/types/app/features/products/pages/+types/daily-leaderboard-page";
 
 const paramsSchema = z.object({
   year: z.coerce.number(),
@@ -78,9 +78,7 @@ export default function DailyLeaderboardPage({
   });
   const previousDay = urlDate.minus({ days: 1 });
   const nextDay = urlDate.plus({ days: 1 });
-
   const isToday = urlDate.equals(DateTime.now().startOf("day"));
-
   return (
     <div className="space-y-10">
       <Hero

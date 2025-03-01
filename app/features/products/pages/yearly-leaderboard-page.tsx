@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
+import { Route } from "./+types/yearly-leaderboard-page";
 import { data, isRouteErrorResponse, Link } from "react-router";
 import { z } from "zod";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
 import ProductPagination from "~/common/components/product-pagination";
-import type { Route } from ".react-router/types/app/features/products/pages/+types/yearly-leaderboard-page";
 
 const paramsSchema = z.object({
   year: z.coerce.number(),
@@ -74,9 +74,7 @@ export default function YearlyLeaderboardPage({
   });
   const previousYear = urlDate.minus({ years: 1 });
   const nextYear = urlDate.plus({ years: 1 });
-
   const isToday = urlDate.equals(DateTime.now().startOf("year"));
-
   return (
     <div className="space-y-10">
       <Hero

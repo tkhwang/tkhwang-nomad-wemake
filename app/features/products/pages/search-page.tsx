@@ -1,11 +1,11 @@
 import { z } from "zod";
+import { Route } from "./+types/search-page";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import ProductPagination from "~/common/components/product-pagination";
 import { Form } from "react-router";
 import { Input } from "~/common/components/ui/input";
 import { Button } from "~/common/components/ui/button";
-import type { Route } from ".react-router/types/app/features/products/pages/+types/search-page";
 
 export const meta: Route.MetaFunction = () => {
   return [

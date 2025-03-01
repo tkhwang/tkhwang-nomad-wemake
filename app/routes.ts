@@ -6,12 +6,9 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  // index
   index("common/pages/home-page.tsx"),
-  // products
   ...prefix("products", [
     index("features/products/pages/products-page.tsx"),
-    //   leaderbaords
     ...prefix("leaderboards", [
       index("features/products/pages/leaderboard-page.tsx"),
       route(
@@ -32,19 +29,15 @@ export default [
       ),
       route(
         "/:period",
-        "features/products/pages/leaderboard-reidirection-page.tsx"
+        "features/products/pages/leaderboards-redirection-page.tsx"
       ),
     ]),
-    // categories
     ...prefix("categories", [
       index("features/products/pages/categories-page.tsx"),
       route("/:category", "features/products/pages/category-page.tsx"),
     ]),
-    // search
     route("/search", "features/products/pages/search-page.tsx"),
-    // submit
     route("/submit", "features/products/pages/submit-page.tsx"),
-    // promote
     route("/promote", "features/products/pages/promote-page.tsx"),
   ]),
 ] satisfies RouteConfig;

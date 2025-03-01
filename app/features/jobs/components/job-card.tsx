@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import { Badge } from "~/common/components/ui/badge";
-import { Button } from "~/common/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "~/common/components/ui/card";
+import { Button } from "~/common/components/ui/button";
+import { Badge } from "~/common/components/ui/badge";
 
 interface JobCardProps {
   id: string;
@@ -15,7 +15,7 @@ interface JobCardProps {
   companyLogoUrl: string;
   companyHq: string;
   title: string;
-  timeAgo: string;
+  postedAt: string;
   type: string;
   positionLocation: string;
   salary: string;
@@ -27,7 +27,7 @@ export function JobCard({
   companyLogoUrl,
   companyHq,
   title,
-  timeAgo,
+  postedAt,
   type,
   positionLocation,
   salary,
@@ -40,11 +40,11 @@ export function JobCard({
             <img
               src={companyLogoUrl}
               alt={`${company} Logo`}
-              className="size-12 rounded-full"
+              className="size-10 rounded-full"
             />
             <div className="space-x-2">
               <span className="text-accent-foreground">{company}</span>
-              <span className="text-xs text-muted-forground">{timeAgo}</span>
+              <span className="text-xs text-muted-foreground">{postedAt}</span>
             </div>
           </div>
           <CardTitle>{title}</CardTitle>
@@ -54,10 +54,11 @@ export function JobCard({
           <Badge variant="outline">{positionLocation}</Badge>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col">
             <span className="text-sm font-medium text-muted-foreground">
               {salary}
             </span>
+
             <span className="text-sm font-medium text-muted-foreground">
               {companyHq}
             </span>
