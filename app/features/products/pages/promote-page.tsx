@@ -21,7 +21,6 @@ export default function PromotePage() {
   const [promotionPeriod, setPromotionPeriod] = useState<
     DateRange | undefined
   >();
-
   const totalDays =
     promotionPeriod?.from && promotionPeriod.to
       ? DateTime.fromJSDate(promotionPeriod.to).diff(
@@ -29,7 +28,6 @@ export default function PromotePage() {
           "days"
         ).days
       : 0;
-
   return (
     <div>
       <Hero
