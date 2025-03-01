@@ -1,59 +1,21 @@
-import {
-  Car,
-  ChevronRightIcon,
-  ChevronUpIcon,
-  DotIcon,
-  EyeIcon,
-  HeartIcon,
-  MessageCircleIcon,
-} from "lucide-react";
-import { Link, type MetaFunction } from "react-router";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/common/components/ui/avatar";
-import { Button } from "~/common/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/common/components/ui/card";
+import { Link, MetaFunction } from "react-router";
 import { ProductCard } from "~/features/products/components/product-card";
+import { Button } from "../components/ui/button";
 import { PostCard } from "~/features/community/components/post-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
-import { Badge } from "~/common/components/ui/badge";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { TeamCard } from "~/features/teams/components/team-card";
-import type { Route } from "~/types";
 
-interface HomePageProps extends Route.ComponentProps {}
-
-export function meta(): MetaFunction {
+export const meta: MetaFunction = () => {
   return [
-    { title: "Home | Product Hunt Clone" },
-    { name: "description", content: "Discover the best new products" },
+    { title: "Home | wemake" },
+    { name: "description", content: "Welcome to wemake" },
   ];
-}
-
-export function loader({}: Route.LoaderArgs) {
-  return {
-    featured: [],
-    trending: [],
-  };
-}
-
-export function action({}: Route.ActionArgs) {
-  return {};
-}
+};
 
 export default function HomePage() {
   return (
     <div className="px-20 space-y-40">
-      {/* product */}
       <div className="grid grid-cols-3 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
@@ -62,50 +24,46 @@ export default function HomePage() {
           <p className="text-xl font-light text-foreground">
             The best products made by our community today.
           </p>
-          <Button variant="link" asChild className="text-xl p-0">
+          <Button variant="link" asChild className="text-lg p-0">
             <Link to="/products/leaderboards">Explore all products &rarr;</Link>
           </Button>
         </div>
-
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 11 }).map((_, index) => (
           <ProductCard
+            key={`productId-${index}`}
             id={`productId-${index}`}
             name="Product Name"
-            description="Product description"
-            commentCount={12}
-            viewCount={12}
+            description="Product Description"
+            commentsCount={12}
+            viewsCount={12}
             votesCount={120}
           />
         ))}
       </div>
-
-      {/* Discussion */}
       <div className="grid grid-cols-3 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
             Latest Discussions
           </h2>
           <p className="text-xl font-light text-foreground">
-            The best products made by our community today.
+            The latest discussions from our community.
           </p>
-          <Button variant="link" asChild className="text-xl p-0">
+          <Button variant="link" asChild className="text-lg p-0">
             <Link to="/community">Explore all discussions &rarr;</Link>
           </Button>
         </div>
-
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 11 }).map((_, index) => (
           <PostCard
-            id={`post-${index}`}
+            key={`postId-${index}`}
+            id={`postId-${index}`}
             title="What is the best productivity tool?"
             author="Nico"
-            authorAvatarUrl="https://github.com/shadcn.png"
+            authorAvatarUrl="https://github.com/apple.png"
             category="Productivity"
-            timeAgo="12 hours ago"
+            postedAt="12 hours ago"
           />
         ))}
       </div>
-
-      {/* IdeaGPT */}
       <div className="grid grid-cols-3 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
@@ -114,24 +72,22 @@ export default function HomePage() {
           <p className="text-xl font-light text-foreground">
             Find ideas for your next project.
           </p>
-          <Button variant="link" asChild className="text-xl p-0">
-            <Link to="/community">Explore all ideas &rarr;</Link>
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to="/ideas">Explore all ideas &rarr;</Link>
           </Button>
         </div>
-
         {Array.from({ length: 5 }).map((_, index) => (
           <IdeaCard
-            id="ideaId"
-            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recomendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business"
-            viewCount={123}
-            timeAgo="12 hours ago"
+            key={`ideaId-${index}`}
+            id={`ideaId-${index}`}
+            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business."
+            viewsCount={123}
+            postedAt="12 hours ago"
             likesCount={12}
             claimed={index % 2 === 0}
           />
         ))}
       </div>
-
-      {/* Jobs */}
       <div className="grid grid-cols-4 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
@@ -140,28 +96,25 @@ export default function HomePage() {
           <p className="text-xl font-light text-foreground">
             Find your dream job.
           </p>
-          <Button variant="link" asChild className="text-xl p-0">
-            <Link to="/community">Explore all jobs &rarr;</Link>
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to="/jobs">Explore all jobs &rarr;</Link>
           </Button>
         </div>
-
-        {Array.from({ length: 15 }).map((_, index) => (
+        {Array.from({ length: 11 }).map((_, index) => (
           <JobCard
-            key={`job-${index}`}
+            key={`jobId-${index}`}
             id={`jobId-${index}`}
             company="Tesla"
             companyLogoUrl="https://github.com/facebook.png"
             companyHq="San Francisco, CA"
             title="Software Engineer"
-            timeAgo="12 hours ago"
+            postedAt="12 hours ago"
             type="Full-time"
             positionLocation="Remote"
             salary="$100,000 - $120,000"
           />
         ))}
       </div>
-
-      {/* Team mates */}
       <div className="grid grid-cols-4 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
@@ -170,18 +123,17 @@ export default function HomePage() {
           <p className="text-xl font-light text-foreground">
             Join a team looking for a new member.
           </p>
-          <Button variant="link" asChild className="text-xl p-0">
+          <Button variant="link" asChild className="text-lg p-0">
             <Link to="/teams">Explore all teams &rarr;</Link>
           </Button>
         </div>
-
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 7 }).map((_, index) => (
           <TeamCard
-            key={`team-${index}`}
+            key={`teamId-${index}`}
             id={`teamId-${index}`}
-            leaderUserName="lynn"
+            leaderUsername="lynn"
             leaderAvatarUrl="https://github.com/inthetiger.png"
-            potitioins={[
+            positions={[
               "React Developer",
               "Backend Developer",
               "Product Manager",

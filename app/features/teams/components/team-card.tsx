@@ -1,60 +1,60 @@
 import { Link } from "react-router";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/common/components/ui/avatar";
-import { Badge } from "~/common/components/ui/badge";
-import { Button } from "~/common/components/ui/button";
-import {
   Card,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "~/common/components/ui/card";
+import { Badge } from "~/common/components/ui/badge";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "~/common/components/ui/avatar";
+import { Button } from "~/common/components/ui/button";
 
 interface TeamCardProps {
   id: string;
-  leaderUserName: string;
+  leaderUsername: string;
   leaderAvatarUrl: string;
-  potitioins: string[];
+  positions: string[];
   projectDescription: string;
 }
 
 export function TeamCard({
   id,
-  leaderUserName,
+  leaderUsername,
   leaderAvatarUrl,
-  potitioins,
+  positions,
   projectDescription,
 }: TeamCardProps) {
   return (
     <Link to={`/teams/${id}`}>
       <Card className="bg-transparent hover:bg-card/50 transition-colors">
         <CardHeader className="flex flex-row items-center">
-          <CardTitle className="text-base">
+          <CardTitle className="text-base leading-loose">
             <Badge
-              variant="secondary"
-              className="inline-flex shadown-sm items-center text-base"
+              variant={"secondary"}
+              className="inline-flex shadow-sm items-center text-base"
             >
-              <span>@{leaderUserName}</span>
+              <span>@{leaderUsername}</span>
               <Avatar className="size-5">
-                <AvatarFallback>{leaderUserName.toUpperCase()}</AvatarFallback>
+                <AvatarFallback>{leaderUsername[0]}</AvatarFallback>
                 <AvatarImage src={leaderAvatarUrl} />
               </Avatar>
             </Badge>
-            <span>is looking for </span>
-            {potitioins.map((potitioin, index) => (
+            <span> is looking for </span>
+            {positions.map((position, index) => (
               <Badge key={index} className="text-base">
-                {potitioin}
+                {position}
               </Badge>
             ))}
-            <span>to build</span>
+            <span> to build </span>
             <span>{projectDescription}</span>
           </CardTitle>
         </CardHeader>
         <CardFooter className="justify-end">
-          <Button variant="link">Join team &rarr;</Button>
+          <Button variant={"link"}>Join team &rarr;</Button>
         </CardFooter>
       </Card>
     </Link>

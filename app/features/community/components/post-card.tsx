@@ -5,11 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "~/common/components/ui/card";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/common/components/ui/avatar";
+import { Avatar, AvatarImage } from "~/common/components/ui/avatar";
+import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Button } from "~/common/components/ui/button";
 import { DotIcon } from "lucide-react";
 
@@ -17,9 +14,9 @@ interface PostCardProps {
   id: string;
   title: string;
   author: string;
-  authorAvatarUrl?: string;
+  authorAvatarUrl: string;
   category: string;
-  timeAgo: string;
+  postedAt: string;
 }
 
 export function PostCard({
@@ -28,26 +25,24 @@ export function PostCard({
   author,
   authorAvatarUrl,
   category,
-  timeAgo,
+  postedAt,
 }: PostCardProps) {
   return (
-    <Link to={`/community/posts/${id}`}>
+    <Link to={`/community/${id}`}>
       <Card className="bg-transparent hover:bg-card/50 transition-colors">
         <CardHeader className="flex flex-row items-center gap-2">
           <Avatar className="size-14">
-            <AvatarFallback>N</AvatarFallback>
+            <AvatarFallback>{author[0]}</AvatarFallback>
             {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} />}
           </Avatar>
           <div className="space-y-2">
-            <CardTitle className="text-2xl font-semibold leading-none tracking-tight">
-              {title}
-            </CardTitle>
-            <div className="flex gap-2 text-xs leading-tight text-muted-foreground">
+            <CardTitle>{title}</CardTitle>
+            <div className="flex gap-2 text-sm leading-tight text-muted-foreground">
               <span>
                 {author} on {category}
               </span>
               <DotIcon className="w-4 h-4" />
-              <span>{timeAgo}</span>
+              <span>{postedAt}</span>
             </div>
           </div>
         </CardHeader>

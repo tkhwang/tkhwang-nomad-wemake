@@ -1,6 +1,6 @@
 import { Hero } from "~/common/components/hero";
 import { CategoryCard } from "../components/category-card";
-import type { Route } from ".react-router/types/app/features/products/pages/+types/categories-page";
+import { Route } from "./+types/categories-page";
 
 export const meta: Route.MetaFunction = () => [
   { title: "Categories | ProductHunt Clone" },
