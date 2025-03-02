@@ -43,6 +43,13 @@
       "when": 1740901946554,
       "tag": "0005_far_ezekiel",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1740902062224,
+      "tag": "0006_low_lucky_pierre",
+      "breakpoints": true
     }
   ]
 }
