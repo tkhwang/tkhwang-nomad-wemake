@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1740899206098,
+      "tag": "0000_sharp_mulholland_black",
+      "breakpoints": true
+    }
+  ]
+}
