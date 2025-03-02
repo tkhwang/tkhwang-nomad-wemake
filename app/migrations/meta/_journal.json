@@ -15,6 +15,13 @@
       "when": 1740900133273,
       "tag": "0001_youthful_screwball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740901164235,
+      "tag": "0002_slippery_amazoness",
+      "breakpoints": true
     }
   ]
 }
