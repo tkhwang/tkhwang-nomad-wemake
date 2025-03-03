@@ -3,7 +3,7 @@
 // import { asc, count, desc, eq } from "drizzle-orm";
 // import { profiles } from "../users/schema";
 
-import client from "~/features/community/supa-client";
+import client from "~/supa-client";
 
 // export const getTopics = async () => {
 //   const allTopics = await db
@@ -43,18 +43,17 @@ import client from "~/features/community/supa-client";
 // };
 
 export const getTopics = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
+  // await new Promise((resolve) => setTimeout(resolve, 4000));
   const { data, error } = await client.from("topics").select("name, slug");
   if (error) throw new Error(error.message);
   return data;
 };
 
 export const getPosts = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
+  // await new Promise((resolve) => setTimeout(resolve, 4000));
   const { data, error } = await client
     .from("community_post_list_view")
     .select(`*`);
-  console.log(error);
   if (error) throw new Error(error.message);
   return data;
 };
